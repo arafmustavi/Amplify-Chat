@@ -30,8 +30,8 @@ AMPLIFY CHAT is a modern, minimalist AI chatbot interface powered by the **Nandi
 
 ### 1. Clone the Repository
 ```bash
-git clone [https://github.com/your-username/amplify-ai.git](https://github.com/your-username/amplify-ai.git)
-cd amplify-ai
+git clone [https://github.com/arafmustavi/Amplify-Chat.git](https://github.com/arafmustavi/Amplify-Chat.git)
+cd Amplify-Chat
 ```
 
 ### 2. Install Dependencies
