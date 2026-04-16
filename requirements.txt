@@ -1,3 +1,7 @@
 transformers == 5.4.0
 torch
 flask
+streamlit 
+pandas 
+plotly-express 
+streamlit-authenticator
