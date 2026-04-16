@@ -1,89 +1,102 @@
-# AMPLIFY CHAT
+# AMPLIFY AI ECOSYSTEM ⚡
 
-AMPLIFY CHAT is a modern, minimalist AI chatbot interface powered by the **Nandi-Mini-150M-Instruct** model. It provides a sleek, browser-based chat experience with a focus on speed, aesthetics, and user feedback.
+AMPLIFY is a locally-hosted, high-performance AI ecosystem. It features a sleek "Glassmorphism" chat interface and a private, password-protected analytics dashboard to track model performance and user interactions in real-time.
 
 ![AMPLIFY Chat Interface](assets/screenshot.png)
 
----
+-----
 
-## ✨ Features
+## ✨ Enhanced Features
 
--   **Modern UI/UX:** A "Glassmorphism" inspired design using a clean monochrome palette.
--   **Live Latency Tracking:** Shows the exact time taken (in seconds) to process and generate each response.
--   **Visual Feedback:** Features a "processing" animation (typing indicator) so users know when the AI is thinking.
--   **Lightweight Model:** Uses the `Nandi-Mini-150M` model, optimized for quick instruction following.
--   **Fully Responsive:** Designed to look great on both desktop and mobile browsers.
--   **Remote Ready:** Pre-configured to work with `ngrok` for instant deployment to the web.
+  * **Public Chat Interface:** A minimalist, modern UI featuring **Markdown Support** for bold text, lists, and code blocks.
+  * **Private Analytics Dashboard:** A dedicated Streamlit app to visualize usage trends, average latency, and chat history.
+  * **Live Latency Tracking:** Monitors server-side inference time down to the millisecond.
+  * **Automated CSV Logging:** Every interaction is sanitized and logged for future analysis and model auditing.
+  * **Edge Optimized:** Powered by the `Nandi-Mini-150M` model, running efficiently on local GPU or CPU.
+  * **Permanent Deployment:** Pre-configured for **ngrok Static Domains** and Basic Authentication.
 
----
+-----
 
 ## 🛠️ Technology Stack
 
--   **Backend:** Python, Flask
--   **Frontend:** HTML5, CSS3 (Flexbox), JavaScript (Fetch API)
--   **AI Engine:** Hugging Face Transformers, PyTorch
--   **Model:** `Rta-AILabs/Nandi-Mini-150M-Instruct`
+| Component | Technology |
+| :--- | :--- |
+| **Backend** | Python, Flask, Streamlit |
+| **Frontend** | HTML5, CSS3, JavaScript (Marked.js) |
+| **Visualization** | Pandas, Plotly Express |
+| **AI Engine** | Hugging Face Transformers, PyTorch |
+| **Model** | `Rta-AILabs/Nandi-Mini-150M-Instruct` |
 
----
+-----
 
 ## 🚀 Installation
 
-### 1. Clone the Repository
+### 1\. Clone the Repository
+
 ```bash
 git clone https://github.com/arafmustavi/Amplify-Chat.git
 cd Amplify-Chat
 ```
 
-### 2. Install Dependencies
-Ensure you have Python 3.8+ installed. It is recommended to use a virtual environment.
+### 2\. Install Dependencies
+
 ```bash
-pip install torch torchvision torchaudio --index-url [https://download.pytorch.org/whl/cu118](https://download.pytorch.org/whl/cu118)  # For CUDA support
-pip install flask transformers accelerate bitsandbytes
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118  # For CUDA
+pip install flask transformers accelerate streamlit pandas plotly-express
 ```
 
-### 3. Project Structure
-Ensure your files are organized as follows:
+### 3\. Project Structure
+
 ```text
-/amplify-ai
-│── app.py             # Flask Backend
+/Amplify-Chat
+│── app.py                 # Chat Backend (Public)
+│── dashboard.py           # Analytics Dashboard (Private)
+│── amplify_chat_history.csv # Automated Data Logs
 └── /templates
-    └── index.html     # Frontend UI
+    └── index.html         # Modern Chat UI
 ```
 
----
+-----
 
 ## 💻 How to Run
 
-### Local Execution
-Run the Flask server:
+### I. The Chat Interface (Public)
+
+Run the Flask server to start the chat:
+
 ```bash
 python app.py
 ```
-Once the model finishes loading (indicated in the terminal), open your browser and go to:
-`http://127.0.0.1:5000`
 
-### Exposing to the Internet (ngrok)
-To share your chatbot with others, use **ngrok**:
-1. Keep the Flask app running in your first terminal.
-2. Open a second terminal and run:
-   ```bash
-   ngrok http 5000
-   ```
-3. Copy the `Forwarding` URL provided by ngrok and share it!
+Open: `http://127.0.0.1:5000`
 
----
+### II. The Admin Dashboard (Private)
 
-## ⚙️ Model Configuration
-The application automatically detects if a GPU (CUDA) is available. If no GPU is found, it will default to CPU mode.
-- **Precision:** Uses `bfloat16` for efficient memory usage.
-- **Inference Params:** - `Temperature: 0.3`
-  - `Top_p: 0.9`
-  - `Max New Tokens: 500`
+Run the Streamlit app in a new terminal to view analytics:
 
----
+```bash
+streamlit run dashboard.py
+```
 
-## 📝 License
-This project is open-source. Please check the `Nandi-Mini` model card on Hugging Face for specific model licensing details.
+Open: `http://127.0.0.1:8501`
 
----
-*Built with ❤️ for a better AI experience.*
+-----
+
+## 🌐 Remote Deployment (ngrok)
+
+To share your AI while keeping your data private, use the following ngrok commands:
+
+1.  **Expose Chat:** `ngrok http --url=your-static-domain.ngrok-free.app 5000`
+2.  **Expose Dashboard (with Password):** `ngrok http 8501 --basic-auth="admin:your_secure_password"`
+
+-----
+
+## ⚙️ Model & Data Configuration
+
+  - **Logging:** Data is stored in `amplify_chat_history.csv` with columns: `timestamp`, `prompt`, `response`, `latency_sec`, and `device`.
+  - **Formatting:** Supports full GFM (GitHub Flavored Markdown) with auto-newline handling.
+  - **Precision:** Uses `bfloat16` for rapid local inference.
+
+-----
+
+*Built with ❤️ for a private, fast, and beautiful AI experience.*
